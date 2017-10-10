@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cafe.jjdev.web.service.Member;
 import cafe.jjdev.web.service.MemberDao;
+import cafe.jjdev.web.service.MemberService;
 
 @Controller
 public class MemberController {
+	@Autowired
+	private MemberService memberService;
+	
 	@Autowired
 	private MemberDao memberDao;
 	
@@ -25,6 +29,7 @@ public class MemberController {
 	public String addMember(MemberRequest memberRequest) {
 		System.out.println(memberRequest);
 		//Member member command 객체(MembrRequest)타입으로 한번에 받기 밑에꺼랑 같지만 다른편한방법(여러개일경우)
+		memberService.addMember(memberRequest);
 		return "redirect:/memberList";//response.sendRedirect("/memberList")
 			
 				//리다시키고 싶으면 뷰쪽에다가 redirect memberlist 뷰 jsp 를 보여주겠다가 아니라 재요청 하겠다는 뜻.

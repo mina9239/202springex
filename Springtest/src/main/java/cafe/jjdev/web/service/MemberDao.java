@@ -9,8 +9,14 @@ public class MemberDao {
 	@Autowired
 	SqlSessionTemplate SqlSessionTemplate;
 	
+	private final String NS = "cafe.jjdev.web.service.MemberMapper.";
+	public int insertMember(Member member) {
+		return SqlSessionTemplate.insert(NS+"insertMember"
+				,member);
+	}
+	
 	public Member selectMemberOne(int memberNo) {
-		return SqlSessionTemplate.selectOne("cafe.jjdev.web.service.MemberMapper.selectMemberOne",memberNo);
+		return SqlSessionTemplate.selectOne(NS+"selectMemberOne",memberNo);
 			}
 
 }
