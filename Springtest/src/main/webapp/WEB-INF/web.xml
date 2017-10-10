@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!--톰캣안에 매개변수를 만들어줌. 변수이름 :contextConfigLocation 그 안의 값 :/WEB-INF/spring/root-context.xml  -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!--설정파일 : root-context.xml -> 리스터를 수정하고싶으면 설정파일을 수정  -->
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<!--웹 서블릿,필터,리스터 사용. 서블릿&필터 : 웹브라우저로부터 요청이 들어와야 실행됨. 리스너는 이벤트에 따라 실행됨.
+	밑에꺼는 톰캣이 부팅될때 실행됨. -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<!--서블릿 1개인 상황 -> 모든 @(annotation)을 가로챔. 직접수정x @controller의 객체들로 간접수정가능.  -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<!-- 설정파일 :  servlet-context.xml  -->
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<!--서블릿이 실행되면 밑에 이게 돌아감.(?)  -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>
