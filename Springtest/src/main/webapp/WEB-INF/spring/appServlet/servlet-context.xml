@@ -15,6 +15,11 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	
+	<!--multipart/formdata 설정 (파일을 처리할때 쓴다) -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
+
+
+	
 	<!--요청을 다 가로채니까, resources로 시작하는 요청들은 서블릿이 가로채지 못하게 하는 소스.(이미지같은것들)  -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
